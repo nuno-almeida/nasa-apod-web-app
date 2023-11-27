@@ -1,6 +1,6 @@
 {
   "name": "nasa-apod-web-app",
-  "homepage": "https://nuno-almeida.github.io/nasa-apod-web-app",
+  "homepage": "https://nuno-almeida.github.io/nasa-apod-web-app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
