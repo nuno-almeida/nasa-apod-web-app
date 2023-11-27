@@ -1,52 +1,85 @@
-import './App.css';
-import { useEffect, useState } from 'react';
+import "./App.css";
+import { useContext } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import AuthContext, { AuthProvider } from "./contexts/AuthContext";
+import HomePage from "./components/pages/Home";
+import Login from "./components/pages/Login";
+import Register from "./components/pages/Register";
+import ByDate from "./components/pages/ByDate";
+import Today from "./components/pages/Today";
+import MainContent from "./components/pages/MainContent";
 
-function App() {
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=6")
-      .then((response) => response.json())
-      .then((data) => {
-        setImages(data);
-        setError(null);
-        setIsLoading(false);
-      })
-      .catch(error => {
-        setImages([]);
-        setError(error.message);
-        setIsLoading(false);
-      });
-  }, []);
-
-  if (isLoading) {
-    return (<div className="spinner-border" role="status">
-    </div>)
+const NavigateTo = ({ children, isAuth, requiresAuth = true }) => {
+  if (requiresAuth) {
+    return isAuth ? children : <Navigate to="/login" replace={true} />;
   }
 
-  if (error) {
-    return (<div className="alert alert-danger">{error}
-    </div>)
-  }
+  return isAuth ? <Navigate to="/" replace={true} /> : children;
+};
+
+const AppRoutes = () => {
+  const { isAuth } = useContext(AuthContext);
 
   return (
-    <div className='m-4'>
-      <div className="row d-flex justify-content-evenly">
-      {images.map(image => (<div key={image.title} className="card col-12 col-md-6 col-lg-3 m-2">
-        <img className="card-img-top" src={image.url} alt='' />
-        <div className="card-body">
-          <h5 className="card-title">{image.title}</h5>
-          <p className="card-text">Date: {image.date}</p>
-          <p className="card-text">{image.explanation}</p>
-        </div>
-      </div>))
-      }</div>
-    </div>
+    <Routes>
+      <Route
+        path="/login"
+        element={
+          <NavigateTo isAuth={isAuth} requiresAuth={false}>
+            <Login />
+          </NavigateTo>
+        }
+      />
 
+      <Route
+        path="/register"
+        element={
+          <NavigateTo isAuth={isAuth} requiresAuth={false}>
+            <Register />
+          </NavigateTo>
+        }
+      />
+
+      <Route path="/" element={<MainContent />}>
+        <Route index element={<HomePage />} />
+
+        <Route
+          path="/today"
+          element={
+            <NavigateTo isAuth={isAuth}>
+              <Today />
+            </NavigateTo>
+          }
+        />
+
+        <Route
+          path="/date"
+          element={
+            <NavigateTo isAuth={isAuth}>
+              <ByDate />
+            </NavigateTo>
+          }
+        ></Route>
+      </Route>
+
+      <Route path="*" element={<Navigate to="/" replace={true} />} />
+    </Routes>
   );
-}
+};
+
+const App = () => {
+  return (
+    <Router>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
+    </Router>
+  );
+};
 
 export default App;
