@@ -27,25 +27,25 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route
-        path="/login"
-        element={
-          <NavigateTo isAuth={isAuth} requiresAuth={false}>
-            <Login />
-          </NavigateTo>
-        }
-      />
-
-      <Route
-        path="/register"
-        element={
-          <NavigateTo isAuth={isAuth} requiresAuth={false}>
-            <Register />
-          </NavigateTo>
-        }
-      />
-
       <Route path="/" element={<MainContent />}>
+        <Route
+          path="/login"
+          element={
+            <NavigateTo isAuth={isAuth} requiresAuth={false}>
+              <Login />
+            </NavigateTo>
+          }
+        />
+
+        <Route
+          path="/register"
+          element={
+            <NavigateTo isAuth={isAuth} requiresAuth={false}>
+              <Register />
+            </NavigateTo>
+          }
+        />
+
         <Route index element={<HomePage />} />
 
         <Route

@@ -1,5 +1,4 @@
 import { useContext, useReducer, useState } from "react";
-import { Link } from "react-router-dom";
 import AlertStatus from "../utils/AlertStatus";
 import AuthContext from "../../contexts/AuthContext";
 
@@ -149,10 +148,6 @@ const Register = () => {
         </button>
 
         {done && <AlertStatus ok={ok} message={message} />}
-
-        <Link className="text-center" to="/login">
-          Login
-        </Link>
       </div>
     </div>
   );

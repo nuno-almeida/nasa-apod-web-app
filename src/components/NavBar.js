@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 
+const iconPath = process.env.PUBLIC_URL + "/assets/logo.png";
+
 const NavBar = () => {
   const { isAuth, logout } = useContext(AuthContext);
 
@@ -11,7 +13,13 @@ const NavBar = () => {
     <nav className="navbar navbar-light" style={{ backgroundColor: "#e3f2fd" }}>
       <ul className="navbar-nav d-flex flex-row align-items-center">
         <Link className="navbar-link px-4" to="/">
-          <img src="" width="30" height="30" alt="" />
+          <img
+            src={iconPath}
+            width="60"
+            height="60"
+            alt=""
+            style={{ borderRadius: "32px" }}
+          />
         </Link>
 
         {isAuth && (
