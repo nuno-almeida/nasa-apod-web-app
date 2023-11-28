@@ -1,10 +1,11 @@
 import DataContainer from "../utils/DataContainer";
 import ContentContainer from "../utils/ContentContainer";
 import useRandomImage from "../../hooks/useRandomImage";
+import Loading from "../utils/Loading";
 
 const HomeContent = ({ isLoading, error, data }) => {
   if (isLoading) {
-    return <div className="spinner-border" role="status"></div>;
+    return <Loading />;
   }
 
   if (error) {

@@ -1,5 +1,5 @@
 import "./App.css";
-import { useContext } from "react";
+import { Suspense, lazy, useContext } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -8,11 +8,13 @@ import {
 } from "react-router-dom";
 import AuthContext, { AuthProvider } from "./contexts/AuthContext";
 import HomePage from "./components/pages/Home";
-import Login from "./components/pages/Login";
-import Register from "./components/pages/Register";
-import ByDate from "./components/pages/ByDate";
-import Today from "./components/pages/Today";
 import MainContent from "./components/pages/MainContent";
+import Loading from "./components/utils/Loading";
+
+const Login = lazy(() => import("./components/pages/Login"));
+const Register = lazy(() => import("./components/pages/Register"));
+const ByDate = lazy(() => import("./components/pages/ByDate"));
+const Today = lazy(() => import("./components/pages/Today"));
 
 const NavigateTo = ({ children, isAuth, requiresAuth = true }) => {
   if (requiresAuth) {
@@ -28,6 +30,8 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<MainContent />}>
+        <Route index element={<HomePage />} />
+
         <Route
           path="/login"
           element={
@@ -45,8 +49,6 @@ const AppRoutes = () => {
             </NavigateTo>
           }
         />
-
-        <Route index element={<HomePage />} />
 
         <Route
           path="/today"
@@ -76,7 +78,9 @@ const App = () => {
   return (
     <Router>
       <AuthProvider>
-        <AppRoutes />
+        <Suspense fallback={<Loading />}>
+          <AppRoutes />
+        </Suspense>
       </AuthProvider>
     </Router>
   );

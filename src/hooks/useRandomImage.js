@@ -38,7 +38,7 @@ const useRandomImage = () => {
   });
 
   const [randomImage, setRandomImage] = useState(null);
-  const index = useRef(1);
+  const index = useRef(0);
 
   useEffect(() => {
     const getData = async () => {

@@ -1,6 +1,7 @@
 import { useContext, useReducer, useState } from "react";
 import AlertStatus from "../utils/AlertStatus";
 import AuthContext from "../../contexts/AuthContext";
+import Loading from "../utils/Loading";
 
 const initialState = {
   pending: false,
@@ -140,11 +141,7 @@ const Register = () => {
           onClick={() => onClickHandler()}
           disabled={pending || (done && ok)}
         >
-          {pending ? (
-            <div className="spinner-border spinner-grow-sm"></div>
-          ) : (
-            "Register"
-          )}
+          {pending ? <Loading /> : "Register"}
         </button>
 
         {done && <AlertStatus ok={ok} message={message} />}

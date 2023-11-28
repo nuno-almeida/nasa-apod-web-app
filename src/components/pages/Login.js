@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AlertStatus from "../utils/AlertStatus";
 import AuthContext from "../../contexts/AuthContext";
+import Loading from "../utils/Loading";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
@@ -65,11 +66,7 @@ const Login = () => {
           className="btn btn-primary"
           onClick={() => onClickHandler()}
         >
-          {status.loading ? (
-            <div className="spinner-border spinner-grow-sm"></div>
-          ) : (
-            "Login"
-          )}
+          {status.loading ? <Loading /> : "Login"}
         </button>
 
         {status.done && <AlertStatus ok={status.ok} message={status.message} />}
