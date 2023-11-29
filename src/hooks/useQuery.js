@@ -1,16 +1,29 @@
 import { useEffect, useRef, useState } from "react";
 
-const getImages = async () => {
+export const QueryType = {
+  Random: "Random",
+  ByDate: "ByDate",
+};
+
+const getUrl = ({ type, date }) => {
+  const url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
+
+  if (type === QueryType.Random) {
+    return `${url}&count=6`;
+  }
+
+  return `${url}&date=${date}`;
+};
+
+const getImages = async ({ type, date }) => {
   try {
-    const response = await fetch(
-      "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=6"
-    );
+    const response = await fetch(getUrl({ type, date }));
 
     const data = await response.json();
 
     if (response.ok) {
       return {
-        images: data,
+        images: Array.isArray(data) ? data : [data],
         error: null,
         loading: false,
       };
@@ -30,32 +43,32 @@ const getImages = async () => {
   }
 };
 
-const useRandomImage = () => {
+const useQuery = ({ type, date }) => {
   const [data, setData] = useState({
     images: [],
     error: null,
     loading: true,
   });
 
-  const [randomImage, setRandomImage] = useState(null);
+  const [image, setImage] = useState(null);
   const index = useRef(0);
 
   useEffect(() => {
     const getData = async () => {
-      const d = await getImages();
-      d.images.length > 0 && setRandomImage(d.images[0]);
+      const d = await getImages({ type, date });
+      d.images.length > 0 && setImage(d.images[0]);
       setData(d);
     };
 
     getData();
-  }, []);
+  }, [type, date]);
 
   useEffect(() => {
     let intervalId;
 
     if (data.images.length > 1) {
       intervalId = setInterval(() => {
-        setRandomImage(data.images[index.current]);
+        setImage(data.images[index.current]);
 
         if (index.current === data.images.length - 1) {
           index.current = 0;
@@ -71,8 +84,8 @@ const useRandomImage = () => {
   return {
     isLoading: data.loading,
     error: data.error,
-    image: randomImage,
+    image,
   };
 };
 
-export default useRandomImage;
+export default useQuery;

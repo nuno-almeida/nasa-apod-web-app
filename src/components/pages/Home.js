@@ -1,38 +1,10 @@
-import DataContainer from "../utils/DataContainer";
-import ContentContainer from "../utils/ContentContainer";
-import useRandomImage from "../../hooks/useRandomImage";
-import Loading from "../utils/Loading";
-
-const HomeContent = ({ isLoading, error, data }) => {
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (error) {
-    return <div className="alert alert-danger">{error}</div>;
-  }
-
-  const { title, date, explanation, url } = data;
-
-  return (
-    <DataContainer
-      key={title}
-      title={title}
-      date={date}
-      explanation={explanation}
-      url={url}
-    />
-  );
-};
+import APODContainer from "../utils/APODContainer";
+import useQuery, { QueryType } from "../../hooks/useQuery";
 
 const Home = () => {
-  const { isLoading, error, image } = useRandomImage();
+  const { isLoading, error, image } = useQuery({ type: QueryType.Random });
 
-  return (
-    <ContentContainer>
-      <HomeContent isLoading={isLoading} error={error} data={image} />
-    </ContentContainer>
-  );
+  return <APODContainer isLoading={isLoading} error={error} image={image} />;
 };
 
 export default Home;
