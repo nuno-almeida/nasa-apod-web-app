@@ -5,6 +5,8 @@ export const QueryType = {
   ByDate: "ByDate",
 };
 
+const cache = {};
+
 const getUrl = ({ type, date }) => {
   const url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
 
@@ -17,11 +19,26 @@ const getUrl = ({ type, date }) => {
 
 const getImages = async ({ type, date }) => {
   try {
-    const response = await fetch(getUrl({ type, date }));
+    let data;
 
-    const data = await response.json();
+    if (!!date && cache[date]) {
+      data = cache[date];
+
+      return {
+        images: Array.isArray(data) ? data : [data],
+        error: null,
+        loading: false,
+      };
+    }
+
+    const response = await fetch(getUrl({ type, date }));
+    data = await response.json();
 
     if (response.ok) {
+      if (!!date) {
+        cache[date] = data;
+      }
+
       return {
         images: Array.isArray(data) ? data : [data],
         error: null,
