@@ -1,8 +1,21 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 
 const iconPath = process.env.PUBLIC_URL + "/assets/logo.png";
+
+const NavigationLink = ({ to, text }) => {
+  return (
+    <NavLink
+      className={({ isActive }) =>
+        `nav-link px-4${isActive ? " text-primary" : ""}`
+      }
+      to={to}
+    >
+      {text}
+    </NavLink>
+  );
+};
 
 const NavBar = () => {
   const { isAuth, logout } = useContext(AuthContext);
@@ -24,13 +37,8 @@ const NavBar = () => {
 
         {isAuth && (
           <>
-            <Link className="nav-link px-4" to="/today">
-              Today
-            </Link>
-
-            <Link className="nav-link px-4" to="/date">
-              By Date
-            </Link>
+            <NavigationLink to="/today" text="Today" />
+            <NavigationLink to="/date" text="By Date" />
           </>
         )}
       </ul>
