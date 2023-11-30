@@ -16,7 +16,10 @@ const ByDate = () => {
   });
 
   const onSelectHandler = (date) => {
-    setUrlParams((params) => ({...params, d: new Date(date).toISOString().split("T")[0]}));
+    setUrlParams((params) => ({
+      ...params,
+      d: new Date(date).toISOString().split("T")[0],
+    }));
     setOpen(false);
   };
 
@@ -41,6 +44,7 @@ const ByDate = () => {
           readOnly={true}
           open={open}
           onInputClick={() => setOpen(true)}
+          onClickOutside={() => open && setOpen(false)}
         />
       }
     />

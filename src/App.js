@@ -78,7 +78,7 @@ const App = () => {
   return (
     <Router>
       <AuthProvider>
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<></>}>
           <AppRoutes />
         </Suspense>
       </AuthProvider>
