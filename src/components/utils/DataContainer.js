@@ -42,7 +42,7 @@ const Description = ({ text }) => {
   );
 };
 
-const DataContainer = ({ title, date, explanation, url, type }) => (
+const DataContainer = ({ title, date, explanation, url, hdurl, type }) => (
   <div
     className="p-0 border"
     style={{ borderRadius: "12px", maxWidth: "600px" }}
@@ -63,8 +63,20 @@ const DataContainer = ({ title, date, explanation, url, type }) => (
         style={{ borderRadius: "12px 12px 0 0", aspectRatio: "16/9" }}
       />
     )}
+
     <div className="card-body p-3">
-      <h4 className="card-title">{title}</h4>
+      <div className="d-flex justify-content-between">
+        <h4 className="card-title">{title}</h4>
+        {!!hdurl && (
+          <button
+            className="btn btn-outline-secondary btn-sm"
+            onClick={() => window.open(hdurl)}
+          >
+            Open HD image
+          </button>
+        )}
+      </div>
+
       <h6 className="card-text">{date}</h6>
       <Description text={explanation} />
     </div>
