@@ -17,7 +17,7 @@ const getUrl = ({ type, date }) => {
   return `${url}&date=${date}`;
 };
 
-const getImages = async ({ type, date }) => {
+const getAPOD = async ({ type, date }) => {
   try {
     let data;
 
@@ -25,7 +25,7 @@ const getImages = async ({ type, date }) => {
       data = cache[date];
 
       return {
-        images: Array.isArray(data) ? data : [data],
+        data: Array.isArray(data) ? data : [data],
         error: null,
         loading: false,
       };
@@ -40,20 +40,20 @@ const getImages = async ({ type, date }) => {
       }
 
       return {
-        images: Array.isArray(data) ? data : [data],
+        data: Array.isArray(data) ? data : [data],
         error: null,
         loading: false,
       };
     }
 
     return {
-      images: [],
+      data: [],
       error: data?.error?.message || "An error has occurred",
       loading: false,
     };
   } catch (error) {
     return {
-      images: [],
+      data: [],
       error: error?.message || "An error has occurred",
       loading: false,
     };
@@ -61,20 +61,24 @@ const getImages = async ({ type, date }) => {
 };
 
 const useQuery = ({ type, date }) => {
-  const [data, setData] = useState({
-    images: [],
+  const [result, setResult] = useState({
+    data: [],
     error: null,
     loading: true,
   });
 
-  const [image, setImage] = useState(null);
+  const [data, setData] = useState(null);
   const index = useRef(0);
 
   useEffect(() => {
     const getData = async () => {
-      const d = await getImages({ type, date });
-      d.images.length > 0 && setImage(d.images[0]);
-      setData(d);
+      if (type === QueryType.ByDate && !date) {
+        return;
+      }
+
+      const res = await getAPOD({ type, date });
+      res.data.length > 0 && setData(res.data[0]);
+      setResult(res);
     };
 
     getData();
@@ -83,11 +87,11 @@ const useQuery = ({ type, date }) => {
   useEffect(() => {
     let intervalId;
 
-    if (data.images.length > 1) {
+    if (result.data.length > 1) {
       intervalId = setInterval(() => {
-        setImage(data.images[index.current]);
+        setData(result.data[index.current]);
 
-        if (index.current === data.images.length - 1) {
+        if (index.current === result.data.length - 1) {
           index.current = 0;
         } else {
           index.current += 1;
@@ -96,12 +100,12 @@ const useQuery = ({ type, date }) => {
     }
 
     return () => !!intervalId && clearInterval(intervalId);
-  }, [data.isLoading, data.images]);
+  }, [result.isLoading, result.data]);
 
   return {
-    isLoading: data.loading,
-    error: data.error,
-    image,
+    isLoading: result.loading,
+    error: result.error,
+    data,
   };
 };
 

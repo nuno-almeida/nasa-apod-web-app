@@ -10,7 +10,7 @@ const ByDate = () => {
 
   const date = urlParams.get("d");
 
-  const { isLoading, error, image } = useQuery({
+  const { isLoading, error, data } = useQuery({
     type: QueryType.ByDate,
     date,
   });
@@ -24,7 +24,7 @@ const ByDate = () => {
     <APODContainer
       isLoading={isLoading}
       error={error}
-      image={image}
+      data={data}
       showMainContent={!!date}
       renderAtTop={
         <DatePicker
