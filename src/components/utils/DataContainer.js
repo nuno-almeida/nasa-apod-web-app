@@ -61,7 +61,7 @@ const DataContainer = ({ title, date, explanation, url, hdurl, type }) => (
         src={url}
         loading="lazy"
         alt=""
-        style={{ borderRadius: "12px 12px 0 0", aspectRatio: "16/9" }}
+        style={{ borderRadius: "12px 12px 0 0", aspectRatio: "1/1" }}
       />
     )}
 

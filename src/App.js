@@ -9,7 +9,7 @@ import {
 import AuthContext, { AuthProvider } from "./contexts/AuthContext";
 import HomePage from "./components/pages/Home";
 import MainContent from "./components/pages/MainContent";
-import Loading from "./components/utils/Loading";
+import { appendToBaseUrl } from "./utils/router";
 
 const Login = lazy(() => import("./components/pages/Login"));
 const Register = lazy(() => import("./components/pages/Register"));
@@ -18,10 +18,10 @@ const Today = lazy(() => import("./components/pages/Today"));
 
 const NavigateTo = ({ children, isAuth, requiresAuth = true }) => {
   if (requiresAuth) {
-    return isAuth ? children : <Navigate to="/login" replace={true} />;
+    return isAuth ? children : <Navigate to={appendToBaseUrl("/login")} replace={true} />;
   }
 
-  return isAuth ? <Navigate to="/" replace={true} /> : children;
+  return isAuth ? <Navigate to={appendToBaseUrl("/")} replace={true} /> : children;
 };
 
 const AppRoutes = () => {
@@ -29,11 +29,11 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<MainContent />}>
+      <Route path={appendToBaseUrl("/")} element={<MainContent />}>
         <Route index element={<HomePage />} />
 
         <Route
-          path="/login"
+          path={appendToBaseUrl("/login")}
           element={
             <NavigateTo isAuth={isAuth} requiresAuth={false}>
               <Login />
@@ -42,7 +42,7 @@ const AppRoutes = () => {
         />
 
         <Route
-          path="/register"
+          path={appendToBaseUrl("/register")}
           element={
             <NavigateTo isAuth={isAuth} requiresAuth={false}>
               <Register />
@@ -51,7 +51,7 @@ const AppRoutes = () => {
         />
 
         <Route
-          path="/today"
+          path={appendToBaseUrl("/today")}
           element={
             <NavigateTo isAuth={isAuth}>
               <Today />
@@ -60,7 +60,7 @@ const AppRoutes = () => {
         />
 
         <Route
-          path="/date"
+          path={appendToBaseUrl("/date")}
           element={
             <NavigateTo isAuth={isAuth}>
               <ByDate />
@@ -69,7 +69,7 @@ const AppRoutes = () => {
         ></Route>
       </Route>
 
-      <Route path="*" element={<Navigate to="/" replace={true} />} />
+      <Route path="*" element={<Navigate to={appendToBaseUrl("/")} replace={true} />} />
     </Routes>
   );
 };

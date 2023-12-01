@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import useViewport from "../hooks/useViewport";
 import AppButton from "./utils/AppButton";
+import { appendToBaseUrl } from "../utils/router";
 
 const iconPath = process.env.PUBLIC_URL + "/assets/logo.png";
 
@@ -33,7 +34,7 @@ const NavBar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light p-4">
-      <Link className="navbar-link" to="/">
+      <Link className="navbar-link" to={appendToBaseUrl("/")}>
         <img
           src={iconPath}
           width="60"
@@ -59,8 +60,8 @@ const NavBar = () => {
         <ul className="navbar-nav mr-auto">
           {isAuth && (
             <>
-              <NavigationLink to="/today" text="Today" />
-              <NavigationLink to="/date" text="By Date" />
+              <NavigationLink to={appendToBaseUrl("/today")} text="Today" />
+              <NavigationLink to={appendToBaseUrl("/date")} text="By Date" />
             </>
           )}
         </ul>
@@ -82,13 +83,13 @@ const NavBar = () => {
             <AppButton
               classes="btn-outline-primary px-4 m-2"
               as="link"
-              linkTo="/register"
+              linkTo={appendToBaseUrl("/register")}
               text="Register"
             />
             <AppButton
               classes="btn-primary px-4 m-2"
               as="link"
-              linkTo="/login"
+              linkTo={appendToBaseUrl("/login")}
               text="Login"
             />
           </div>
