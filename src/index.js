@@ -11,9 +11,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
+    <div className="bg-light-subtle" style={{height: "100vh"}}>
     <ErrorBoundary>
       <App />
     </ErrorBoundary>
+    </div>
+
   </React.StrictMode>
 );
 
