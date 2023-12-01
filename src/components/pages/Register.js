@@ -63,7 +63,9 @@ const Register = () => {
   const [state, dispacth] = useReducer(reducer, initialState);
   const { pending, ok, message, done } = state;
 
-  const onClickHandler = () => {
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+
     if (user.length < 3) {
       setInvalidUser(true);
     } else if (pass.length < 6) {
@@ -91,58 +93,61 @@ const Register = () => {
 
   return (
     <AuthWrapper>
-      <label>User</label>
-      <input
-        type="text"
-        value={user}
-        onChange={(e) => {
-          setInvalidUser(false);
-          setUser(e.target.value);
-        }}
-      />
-      {invalidUser && (
-        <p className="text-danger small">
-          Username should have at least 3 characters
-        </p>
-      )}
+      <form onSubmit={onSubmitHandler} className="d-flex flex-column gap-1">
+        <label>User Id</label>
+        <input
+          type="text"
+          value={user}
+          onChange={(e) => {
+            setInvalidUser(false);
+            setUser(e.target.value);
+          }}
+        />
+        {invalidUser && (
+          <p className="text-danger small">
+            User Id should have at least 3 characters
+          </p>
+        )}
 
-      <label>Pass</label>
-      <input
-        type="password"
-        value={pass}
-        onChange={(e) => {
-          setInvalidPass(false);
-          setPass(e.target.value);
-        }}
-      />
-      {invalidPass && (
-        <p className="text-danger small">
-          Password should have at least 6 characters
-        </p>
-      )}
+        <label>Password</label>
+        <input
+          type="password"
+          value={pass}
+          autoComplete="off"
+          onChange={(e) => {
+            setInvalidPass(false);
+            setPass(e.target.value);
+          }}
+        />
+        {invalidPass && (
+          <p className="text-danger small">
+            Password should have at least 6 characters
+          </p>
+        )}
 
-      <label>Confirm Password</label>
-      <input
-        type="password"
-        value={confirmPass}
-        onChange={(e) => {
-          setInvalidConfirmPass(false);
-          setConfirmPass(e.target.value);
-        }}
-      />
-      {invalidConfirmPass && (
-        <p className="text-danger small">Confirm password not mach password</p>
-      )}
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          value={confirmPass}
+          autoComplete="off"
+          onChange={(e) => {
+            setInvalidConfirmPass(false);
+            setConfirmPass(e.target.value);
+          }}
+        />
+        {invalidConfirmPass && (
+          <p className="text-danger small">Passwords not match</p>
+        )}
 
-      <AppButton
-        classes="btn-primary"
-        clickHandler={onClickHandler}
-        disabled={pending || (done && ok)}
-      >
-        {pending ? <Loading /> : "Register"}
-      </AppButton>
-
-      {done && <AlertStatus ok={ok} message={message} />}
+        <AppButton
+          type="submit"
+          classes="btn-primary my-2"
+          disabled={pending || (done && ok)}
+        >
+          {pending ? <Loading /> : "Register"}
+        </AppButton>
+        {done && <AlertStatus ok={ok} message={message} />}
+      </form>
     </AuthWrapper>
   );
 };

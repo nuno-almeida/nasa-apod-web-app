@@ -65,36 +65,34 @@ const NavBar = () => {
           )}
         </ul>
 
-        <div>
-          {isAuth && (
-            <AppButton
-              classes="btn-outline-primary my-2"
-              clickHandler={logoutHandler}
-              text="Logout"
-            />
-          )}
+        {isAuth && (
+          <AppButton
+            classes="btn-outline-primary my-2"
+            clickHandler={logoutHandler}
+            text="Logout"
+          />
+        )}
 
-          {!isAuth && (
-            <div
-              className={`d-flex ${
-                !isLarge && "flex-column align-items-start "
-              }my-2`}
-            >
-              <AppButton
-                classes="btn-outline-primary px-4 m-2"
-                as="link"
-                linkTo="/register"
-                text="Register"
-              />
-              <AppButton
-                classes="btn-primary px-4 m-2"
-                as="link"
-                linkTo="/login"
-                text="Login"
-              />
-            </div>
-          )}
-        </div>
+        {!isAuth && (
+          <div
+            className={`d-flex ${
+              !isLarge && "flex-column align-items-start "
+            }my-2`}
+          >
+            <AppButton
+              classes="btn-outline-primary px-4 m-2"
+              as="link"
+              linkTo="/register"
+              text="Register"
+            />
+            <AppButton
+              classes="btn-primary px-4 m-2"
+              as="link"
+              linkTo="/login"
+              text="Login"
+            />
+          </div>
+        )}
       </div>
     </nav>
   );

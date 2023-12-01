@@ -3,12 +3,13 @@ import useViewport from "../../hooks/useViewport";
 
 const AppButton = ({
   text,
-  clickHandler,
+  clickHandler = () => {},
   classes = "",
   linkTo,
   as = "button",
+  type = "button",
   children,
-  disabled
+  disabled,
 }) => {
   const viewport = useViewport();
   const isLarge = viewport === "lg";
@@ -24,6 +25,7 @@ const AppButton = ({
 
   return (
     <button
+      type={type}
       className={`btn ${classes} ${!isLarge && "btn-sm"}`}
       onClick={clickHandler}
       disabled={disabled}

@@ -7,14 +7,8 @@ const AuthWrapper = ({ children }) => {
   const viewport = useViewport();
 
   return (
-    <div className="w-100 d-flex justify-content-center py-4">
-      <div
-        className={`container d-flex flex-column gap-2 ${getWidthClass(
-          viewport
-        )}`}
-      >
-        {children}
-      </div>
+    <div className={`container py-4 ${getWidthClass(viewport)}`}>
+      {children}
     </div>
   );
 };

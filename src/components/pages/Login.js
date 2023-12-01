@@ -20,7 +20,9 @@ const Login = () => {
     message: "",
   });
 
-  const onClickHandler = () => {
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+
     setStatus((prev) => ({ ...prev, loading: true }));
 
     login({ user, pass }).then((resp) =>
@@ -48,28 +50,28 @@ const Login = () => {
 
   return (
     <AuthWrapper>
-      <label>User</label>
-      <input
-        type="text"
-        value={user}
-        onChange={(e) => onUserChangeHandler(e.target.value)}
-      />
+      <form onSubmit={onSubmitHandler} className="d-flex flex-column gap-1">
+        <label>User Id</label>
+        <input
+          type="text"
+          value={user}
+          onChange={(e) => onUserChangeHandler(e.target.value)}
+        />
 
-      <label>Pass</label>
-      <input
-        type="password"
-        value={pass}
-        onChange={(e) => onPassChangeHandler(e.target.value)}
-      />
+        <label>Password</label>
+        <input
+          type="password"
+          value={pass}
+          onChange={(e) => onPassChangeHandler(e.target.value)}
+          autoComplete="off"
+        />
 
-      <AppButton
-        classes="btn-primary"
-        clickHandler={onClickHandler}
-      >
-        {status.loading ? <Loading /> : "Login"}
-      </AppButton>
+        <AppButton type="submit" classes="btn-primary my-2">
+          {status.loading ? <Loading /> : "Login"}
+        </AppButton>
 
-      {status.done && <AlertStatus ok={status.ok} message={status.message} />}
+        {status.done && <AlertStatus ok={status.ok} message={status.message} />}
+      </form>
     </AuthWrapper>
   );
 };
