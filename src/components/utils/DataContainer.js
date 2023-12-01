@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import AuthContext from "../../contexts/AuthContext";
+import AppButton from "./AppButton";
 
 const Description = ({ text }) => {
   const { isAuth } = useContext(AuthContext);
@@ -68,12 +69,11 @@ const DataContainer = ({ title, date, explanation, url, hdurl, type }) => (
       <div className="d-flex justify-content-between">
         <h4 className="card-title">{title}</h4>
         {!!hdurl && (
-          <button
-            className="btn btn-outline-secondary btn-sm"
-            onClick={() => window.open(hdurl)}
-          >
-            Open HD image
-          </button>
+          <AppButton
+            classes="btn-outline-secondary"
+            clickHandler={() => window.open(hdurl)}
+            text="Open HD image"
+          />
         )}
       </div>
 

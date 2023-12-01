@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 const getViewport = (width) =>
-  width >= 1200 ? "lg" : width >= 768 ? "md" : "sm";
+  width >= 992 ? "lg" : width >= 768 ? "md" : "sm";
 
 const useViewport = () => {
   const [viewport, setViewport] = useState(() =>

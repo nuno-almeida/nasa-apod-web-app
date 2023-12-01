@@ -4,6 +4,7 @@ import AlertStatus from "../utils/AlertStatus";
 import AuthContext from "../../contexts/AuthContext";
 import Loading from "../utils/Loading";
 import AuthWrapper from "../utils/AuthWrapper";
+import AppButton from "../utils/AppButton";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
@@ -61,13 +62,12 @@ const Login = () => {
         onChange={(e) => onPassChangeHandler(e.target.value)}
       />
 
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={() => onClickHandler()}
+      <AppButton
+        classes="btn-primary"
+        clickHandler={onClickHandler}
       >
         {status.loading ? <Loading /> : "Login"}
-      </button>
+      </AppButton>
 
       {status.done && <AlertStatus ok={status.ok} message={status.message} />}
     </AuthWrapper>

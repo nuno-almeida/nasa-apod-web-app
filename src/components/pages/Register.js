@@ -3,6 +3,7 @@ import AlertStatus from "../utils/AlertStatus";
 import AuthContext from "../../contexts/AuthContext";
 import Loading from "../utils/Loading";
 import AuthWrapper from "../utils/AuthWrapper";
+import AppButton from "../utils/AppButton";
 
 const initialState = {
   pending: false,
@@ -133,14 +134,13 @@ const Register = () => {
         <p className="text-danger small">Confirm password not mach password</p>
       )}
 
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={() => onClickHandler()}
+      <AppButton
+        classes="btn-primary"
+        clickHandler={onClickHandler}
         disabled={pending || (done && ok)}
       >
         {pending ? <Loading /> : "Register"}
-      </button>
+      </AppButton>
 
       {done && <AlertStatus ok={ok} message={message} />}
     </AuthWrapper>
