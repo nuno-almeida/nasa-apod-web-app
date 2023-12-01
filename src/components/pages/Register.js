@@ -2,6 +2,7 @@ import { useContext, useReducer, useState } from "react";
 import AlertStatus from "../utils/AlertStatus";
 import AuthContext from "../../contexts/AuthContext";
 import Loading from "../utils/Loading";
+import AuthWrapper from "../utils/AuthWrapper";
 
 const initialState = {
   pending: false,
@@ -88,65 +89,61 @@ const Register = () => {
   };
 
   return (
-    <div className="w-100 d-flex justify-content-center py-4">
-      <div className="d-flex flex-column gap-2  w-50">
-        <label>User</label>
-        <input
-          type="text"
-          value={user}
-          onChange={(e) => {
-            setInvalidUser(false);
-            setUser(e.target.value);
-          }}
-        />
-        {invalidUser && (
-          <p className="text-danger small">
-            Username should have at least 3 characters
-          </p>
-        )}
+    <AuthWrapper>
+      <label>User</label>
+      <input
+        type="text"
+        value={user}
+        onChange={(e) => {
+          setInvalidUser(false);
+          setUser(e.target.value);
+        }}
+      />
+      {invalidUser && (
+        <p className="text-danger small">
+          Username should have at least 3 characters
+        </p>
+      )}
 
-        <label>Pass</label>
-        <input
-          type="password"
-          value={pass}
-          onChange={(e) => {
-            setInvalidPass(false);
-            setPass(e.target.value);
-          }}
-        />
-        {invalidPass && (
-          <p className="text-danger small">
-            Password should have at least 6 characters
-          </p>
-        )}
+      <label>Pass</label>
+      <input
+        type="password"
+        value={pass}
+        onChange={(e) => {
+          setInvalidPass(false);
+          setPass(e.target.value);
+        }}
+      />
+      {invalidPass && (
+        <p className="text-danger small">
+          Password should have at least 6 characters
+        </p>
+      )}
 
-        <label>Confirm Password</label>
-        <input
-          type="password"
-          value={confirmPass}
-          onChange={(e) => {
-            setInvalidConfirmPass(false);
-            setConfirmPass(e.target.value);
-          }}
-        />
-        {invalidConfirmPass && (
-          <p className="text-danger small">
-            Confirm password not mach password
-          </p>
-        )}
+      <label>Confirm Password</label>
+      <input
+        type="password"
+        value={confirmPass}
+        onChange={(e) => {
+          setInvalidConfirmPass(false);
+          setConfirmPass(e.target.value);
+        }}
+      />
+      {invalidConfirmPass && (
+        <p className="text-danger small">Confirm password not mach password</p>
+      )}
 
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => onClickHandler()}
-          disabled={pending || (done && ok)}
-        >
-          {pending ? <Loading /> : "Register"}
-        </button>
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={() => onClickHandler()}
+        disabled={pending || (done && ok)}
+      >
+        {pending ? <Loading /> : "Register"}
+      </button>
 
-        {done && <AlertStatus ok={ok} message={message} />}
-      </div>
-    </div>
+      {done && <AlertStatus ok={ok} message={message} />}
+    </AuthWrapper>
   );
 };
 

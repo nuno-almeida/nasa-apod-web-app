@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AlertStatus from "../utils/AlertStatus";
 import AuthContext from "../../contexts/AuthContext";
 import Loading from "../utils/Loading";
+import AuthWrapper from "../utils/AuthWrapper";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
@@ -45,33 +46,31 @@ const Login = () => {
   };
 
   return (
-    <div className="w-100 d-flex justify-content-center py-4">
-      <div className="d-flex flex-column gap-2  w-50">
-        <label>User</label>
-        <input
-          type="text"
-          value={user}
-          onChange={(e) => onUserChangeHandler(e.target.value)}
-        />
+    <AuthWrapper>
+      <label>User</label>
+      <input
+        type="text"
+        value={user}
+        onChange={(e) => onUserChangeHandler(e.target.value)}
+      />
 
-        <label>Pass</label>
-        <input
-          type="password"
-          value={pass}
-          onChange={(e) => onPassChangeHandler(e.target.value)}
-        />
+      <label>Pass</label>
+      <input
+        type="password"
+        value={pass}
+        onChange={(e) => onPassChangeHandler(e.target.value)}
+      />
 
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => onClickHandler()}
-        >
-          {status.loading ? <Loading /> : "Login"}
-        </button>
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={() => onClickHandler()}
+      >
+        {status.loading ? <Loading /> : "Login"}
+      </button>
 
-        {status.done && <AlertStatus ok={status.ok} message={status.message} />}
-      </div>
-    </div>
+      {status.done && <AlertStatus ok={status.ok} message={status.message} />}
+    </AuthWrapper>
   );
 };
 
