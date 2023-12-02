@@ -12,7 +12,7 @@ const Description = ({ text }) => {
 
     if (!!rect) {
       const { top, bottom } = rect;
-      setPositionY((top - bottom) / 2 - 20);
+      setPositionY((top - bottom) / 2 - 25);
     }
   }, []);
 
@@ -25,7 +25,7 @@ const Description = ({ text }) => {
           ...(!isAuth && { filter: "blur(3px)" }),
         }}
       >
-        {text}
+        {isAuth ? text : ("" + text).slice(0, 100)}
       </p>
       {!isAuth && positionY !== 0 && (
         <h4
@@ -34,6 +34,8 @@ const Description = ({ text }) => {
             position: "relative",
             top: "" + positionY + "px",
             fontStyle: "italic",
+            fontWeight: 300,
+            fontSize: "medium",
           }}
         >
           Description is available only for registered users
