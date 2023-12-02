@@ -17,10 +17,10 @@ const Today = lazy(() => import("./components/pages/Today"));
 
 const NavigateTo = ({ children, isAuth, requiresAuth = true }) => {
   if (requiresAuth) {
-    return isAuth ? children : <Navigate to="/login" replace={true} />;
+    return isAuth ? children : <Navigate to="/login" />;
   }
 
-  return isAuth ? <Navigate to="/" replace={true} /> : children;
+  return isAuth ? <Navigate to="/" /> : children;
 };
 
 const AppRoutes = () => {
@@ -68,7 +68,7 @@ const AppRoutes = () => {
         ></Route>
       </Route>
 
-      <Route path="*" element={<Navigate to="/" replace={true} />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 };

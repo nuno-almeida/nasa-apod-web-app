@@ -96,7 +96,7 @@ const useQuery = ({ type, date }) => {
         } else {
           index.current += 1;
         }
-      }, 15000);
+      }, 5000);
     }
 
     return () => !!intervalId && clearInterval(intervalId);
@@ -106,6 +106,7 @@ const useQuery = ({ type, date }) => {
     isLoading: result.loading,
     error: result.error,
     data,
+    allItems: result.data
   };
 };
 
