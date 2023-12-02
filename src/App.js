@@ -76,7 +76,7 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <Router>
+    <Router basename="/nasa-apod-web-app">
       <AuthProvider>
         <Suspense fallback={<></>}>
           <AppRoutes />
