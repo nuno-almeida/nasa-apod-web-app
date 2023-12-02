@@ -9,7 +9,6 @@ import {
 import AuthContext, { AuthProvider } from "./contexts/AuthContext";
 import HomePage from "./components/pages/Home";
 import MainContent from "./components/pages/MainContent";
-import { appendToBaseUrl } from "./utils/router";
 
 const Login = lazy(() => import("./components/pages/Login"));
 const Register = lazy(() => import("./components/pages/Register"));
@@ -18,10 +17,10 @@ const Today = lazy(() => import("./components/pages/Today"));
 
 const NavigateTo = ({ children, isAuth, requiresAuth = true }) => {
   if (requiresAuth) {
-    return isAuth ? children : <Navigate to={appendToBaseUrl("/login")} replace={true} />;
+    return isAuth ? children : <Navigate to="/login" replace={true} />;
   }
 
-  return isAuth ? <Navigate to={appendToBaseUrl("/")} replace={true} /> : children;
+  return isAuth ? <Navigate to="/" replace={true} /> : children;
 };
 
 const AppRoutes = () => {
@@ -29,11 +28,11 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route path={appendToBaseUrl("/")} element={<MainContent />}>
+      <Route path="/" element={<MainContent />}>
         <Route index element={<HomePage />} />
 
         <Route
-          path={appendToBaseUrl("/login")}
+          path="/login"
           element={
             <NavigateTo isAuth={isAuth} requiresAuth={false}>
               <Login />
@@ -42,7 +41,7 @@ const AppRoutes = () => {
         />
 
         <Route
-          path={appendToBaseUrl("/register")}
+          path="/register"
           element={
             <NavigateTo isAuth={isAuth} requiresAuth={false}>
               <Register />
@@ -51,7 +50,7 @@ const AppRoutes = () => {
         />
 
         <Route
-          path={appendToBaseUrl("/today")}
+          path="/today"
           element={
             <NavigateTo isAuth={isAuth}>
               <Today />
@@ -60,7 +59,7 @@ const AppRoutes = () => {
         />
 
         <Route
-          path={appendToBaseUrl("/date")}
+          path="/date"
           element={
             <NavigateTo isAuth={isAuth}>
               <ByDate />
@@ -69,20 +68,20 @@ const AppRoutes = () => {
         ></Route>
       </Route>
 
-      <Route path="*" element={<Navigate to={appendToBaseUrl("/")} replace={true} />} />
+      <Route path="*" element={<Navigate to="/" replace={true} />} />
     </Routes>
   );
 };
 
 const App = () => {
   return (
-    <Router basename="/nasa-apod-web-app">
-      <AuthProvider>
+    <AuthProvider>
+      <Router basename="/nasa-apod-web-app">
         <Suspense fallback={<></>}>
           <AppRoutes />
         </Suspense>
-      </AuthProvider>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 };
 
