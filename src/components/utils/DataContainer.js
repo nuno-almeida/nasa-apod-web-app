@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import AuthContext from "../../contexts/AuthContext";
 import AppButton from "./AppButton";
+import "./scss/DataContainer.scss";
 
 const Description = ({ text }) => {
   const { isAuth } = useContext(AuthContext);
@@ -29,13 +30,9 @@ const Description = ({ text }) => {
       </p>
       {!isAuth && positionY !== 0 && (
         <h4
-          className="text-danger text-center"
+          className="text-danger text-center no-auth-decription "
           style={{
-            position: "relative",
             top: "" + positionY + "px",
-            fontStyle: "italic",
-            fontWeight: 300,
-            fontSize: "medium",
           }}
         >
           Description is available only for registered users
@@ -46,10 +43,7 @@ const Description = ({ text }) => {
 };
 
 const DataContainer = ({ title, date, explanation, url, hdurl, type }) => (
-  <div
-    className="p-0 border"
-    style={{ borderRadius: "12px", maxWidth: "600px" }}
-  >
+  <div className="p-0 border data-container">
     {type === "video" ? (
       <iframe
         title={title}
@@ -59,11 +53,11 @@ const DataContainer = ({ title, date, explanation, url, hdurl, type }) => (
       ></iframe>
     ) : (
       <img
-        className="card-img-top"
+        className="card-img-top image-container"
         src={url}
         loading="lazy"
         alt=""
-        style={{ borderRadius: "12px 12px 0 0", aspectRatio: "1/1" }}
+        style={{ aspectRatio: "1/1" }}
       />
     )}
 

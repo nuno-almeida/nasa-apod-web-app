@@ -1,0 +1,17 @@
+@import "../../../scss/custom.scss";
+
+.data-container {
+  border-radius: 12px;
+  max-width: 600px;
+}
+
+.image-container {
+  border-radius: 12px 12px 0 0;
+}
+
+.no-auth-decription {
+  position: relative;
+  font-style: italic;
+  font-weight: 300;
+  font-size: medium;
+}

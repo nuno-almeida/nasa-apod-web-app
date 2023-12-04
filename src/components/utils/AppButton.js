@@ -16,7 +16,10 @@ const AppButton = ({
 
   if (as === "link") {
     return (
-      <Link className={`btn ${classes} ${!isLarge && "btn-sm"}`} to={linkTo}>
+      <Link
+        className={`btn ${classes} ${!isLarge ? "btn-sm" : ""}`}
+        to={linkTo}
+      >
         {!!text && text}
         {children}
       </Link>
@@ -26,7 +29,7 @@ const AppButton = ({
   return (
     <button
       type={type}
-      className={`btn ${classes} ${!isLarge && "btn-sm"}`}
+      className={`btn ${classes} ${!isLarge ? "btn-sm" : ""}`}
       onClick={clickHandler}
       disabled={disabled}
     >

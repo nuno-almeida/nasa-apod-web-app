@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DataContainer from "./DataContainer";
 import Loading from "./Loading";
+import "./scss/APODContainer.scss";
 
 const Content = ({ isLoading, error, data }) => {
   const [sliderIndex, setSliderIndex] = useState(0);
@@ -59,27 +60,19 @@ const Content = ({ isLoading, error, data }) => {
         type={item.media_type}
       />
       <button
-        className="carousel-control-prev"
+        className="carousel-control-prev carousel-control-btn"
         type="button"
         onClick={prevHandler}
-        style={{ height: "100px" }}
       >
-        <span
-          className="carousel-control-prev-icon bg-black"
-          style={{ borderRadius: "16px", width: "3rem", height: "3rem" }}
-        />
+        <span className="carousel-control-prev-icon carousel-control-btn-icon bg-black" />
       </button>
 
       <button
-        className="carousel-control-next"
+        className="carousel-control-next carousel-control-btn"
         type="button"
         onClick={nextHandler}
-        style={{ height: "100px" }}
       >
-        <span
-          className="carousel-control-next-icon bg-black"
-          style={{ borderRadius: "16px", width: "3rem", height: "3rem" }}
-        />
+        <span className="carousel-control-next-icon carousel-control-btn-icon bg-black" />
       </button>
     </div>
   );

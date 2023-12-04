@@ -6,7 +6,7 @@ const Loading = () => {
 
   return (
     <div
-      className={`spinner-border ${!isLarge && "spinner-border-sm"}`}
+      className={`spinner-border ${!isLarge ? "spinner-border-sm" : ""}`}
       role="status"
     ></div>
   );

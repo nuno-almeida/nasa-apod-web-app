@@ -14,7 +14,7 @@ const NavigationLink = ({ to, text }) => {
   return (
     <NavLink
       className={({ isActive }) =>
-        `nav-link ${isLarge && "px-4"}${isActive ? " text-primary" : ""}`
+        `nav-link ${isLarge ? "px-4" : ""}${isActive ? " text-primary" : ""}`
       }
       to={to}
     >
@@ -38,7 +38,7 @@ const NavBar = () => {
         {({ isActive }) => (
           <img
             src={iconPath}
-            className={`home-btn ${isActive && "home-btn-home-selected"}`}
+            className={`home-btn ${isActive ? "home-btn-home-selected" : ""}`}
             alt=""
           />
         )}
@@ -53,8 +53,8 @@ const NavBar = () => {
       </button>
 
       <div
-        className={`d-lg-flex justify-content-lg-between w-100 collapse navbar-collapse${
-          showMenu && " show"
+        className={`d-lg-flex justify-content-lg-between w-100 collapse navbar-collapse ${
+          showMenu ? "show" : ""
         }`}
       >
         <ul className="navbar-nav mr-auto">
@@ -77,8 +77,8 @@ const NavBar = () => {
         {!isAuth && (
           <div
             className={`d-flex ${
-              !isLarge && "flex-column align-items-start "
-            }my-2`}
+              !isLarge ? "flex-column align-items-start" : ""
+            } my-2`}
           >
             <AppButton
               classes="btn-outline-primary px-4 m-2"
