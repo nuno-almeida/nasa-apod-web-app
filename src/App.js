@@ -1,4 +1,3 @@
-import "./App.css";
 import { Suspense, lazy, useContext } from "react";
 import {
   BrowserRouter as Router,

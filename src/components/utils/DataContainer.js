@@ -20,7 +20,7 @@ const Description = ({ text }) => {
     <>
       <p
         ref={ref}
-        className="card-text text-secondary py-2"
+        className="card-text py-2"
         style={{
           ...(!isAuth && { filter: "blur(3px)" }),
         }}

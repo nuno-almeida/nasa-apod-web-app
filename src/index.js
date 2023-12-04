@@ -1,22 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import "./index.scss";
 import App from "./App";
 import ErrorBoundary from "./components/ErrorBoundary";
 import reportWebVitals from "./reportWebVitals";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <div className="bg-light-subtle" style={{height: "100vh"}}>
     <ErrorBoundary>
       <App />
     </ErrorBoundary>
-    </div>
-
   </React.StrictMode>
 );
 

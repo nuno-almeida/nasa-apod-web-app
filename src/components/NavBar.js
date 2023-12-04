@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import useViewport from "../hooks/useViewport";
 import AppButton from "./utils/AppButton";
+import "./NavBar.scss";
 
 const iconPath = process.env.PUBLIC_URL + "/assets/logo.png";
 
@@ -32,7 +33,7 @@ const NavBar = () => {
   const logoutHandler = () => logout();
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light p-4">
+    <nav className="navbar navbar-expand-lg navbar-light p-4">
       <Link className="navbar-link" to="/">
         <img
           src={iconPath}
