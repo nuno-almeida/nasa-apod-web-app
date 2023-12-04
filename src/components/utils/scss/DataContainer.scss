@@ -1,17 +1,32 @@
-@import "../../../scss/custom.scss";
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
 
-.data-container {
-  border-radius: 12px;
-  max-width: 600px;
+$background-body-color: #d1d5d3;
+$background-navbar-color: gray;
+
+// override default bootstrap colors
+$primary: #fdb21e;
+$secondary: #7bc4be;
+
+$theme-colors: map-merge(
+  $theme-colors,
+  (
+    "primary": $primary,
+    "secondary": $secondary,
+  )
+);
+
+@font-face {
+  font-family: "DIN";
+  font-weight: normal;
+  src: url("./din-regular.ttf");
 }
 
-.image-container {
-  border-radius: 12px 12px 0 0;
-}
+$font-family: "DIN", sans-serif;
+$font-family-base: "DIN", sans-serif;
 
-.no-auth-decription {
-  position: relative;
-  font-style: italic;
-  font-weight: 300;
-  font-size: medium;
-}
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// NOTE Watch your custom Sass for changes and compile it to CSS
+// https://getbootstrap.com/docs/5.3/customize/sass/
+// sass --watch src/scss/custom.scss public/css/custom.css

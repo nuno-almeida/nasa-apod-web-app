@@ -43,7 +43,7 @@ const Description = ({ text }) => {
 };
 
 const DataContainer = ({ title, date, explanation, url, hdurl, type }) => (
-  <div className="p-0 border data-container">
+  <div className="p-0 data-container">
     {type === "video" ? (
       <iframe
         title={title}
@@ -68,7 +68,7 @@ const DataContainer = ({ title, date, explanation, url, hdurl, type }) => (
           <AppButton
             classes="btn-secondary"
             clickHandler={() => window.open(hdurl)}
-            text="Open HD image"
+            text="Show HD"
           />
         )}
       </div>

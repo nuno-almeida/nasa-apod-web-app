@@ -64,7 +64,7 @@ const Content = ({ isLoading, error, data }) => {
         type="button"
         onClick={prevHandler}
       >
-        <span className="carousel-control-prev-icon carousel-control-btn-icon bg-black" />
+        <span className="carousel-control-prev-icon carousel-control-btn-icon" />
       </button>
 
       <button
@@ -72,7 +72,7 @@ const Content = ({ isLoading, error, data }) => {
         type="button"
         onClick={nextHandler}
       >
-        <span className="carousel-control-next-icon carousel-control-btn-icon bg-black" />
+        <span className="carousel-control-next-icon carousel-control-btn-icon" />
       </button>
     </div>
   );
