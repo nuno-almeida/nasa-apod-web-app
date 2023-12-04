@@ -94,7 +94,9 @@ const Register = () => {
   return (
     <AuthWrapper>
       <form onSubmit={onSubmitHandler} className="d-flex flex-column gap-1">
-        <label>User Id</label>
+        <label>
+          <strong>User Id</strong>
+        </label>
         <input
           type="text"
           value={user}
@@ -109,7 +111,9 @@ const Register = () => {
           </p>
         )}
 
-        <label>Password</label>
+        <label>
+          <strong>Password</strong>
+        </label>
         <input
           type="password"
           value={pass}
@@ -125,7 +129,9 @@ const Register = () => {
           </p>
         )}
 
-        <label>Confirm Password</label>
+        <label>
+          <strong>Confirm Password</strong>
+        </label>
         <input
           type="password"
           value={confirmPass}

@@ -73,7 +73,7 @@ const DataContainer = ({ title, date, explanation, url, hdurl, type }) => (
         )}
       </div>
 
-      <h6 className="card-text">{date}</h6>
+      <h6 className="card-text card-text-date">{date}</h6>
       <Description text={explanation} />
     </div>
   </div>

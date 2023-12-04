@@ -2,7 +2,7 @@
 @import "../../node_modules/bootstrap/scss/variables";
 
 $background-body-color: #d1d5d3;
-$background-navbar-color: #009bba;
+$background-navbar-color: gray;
 
 // override default bootstrap colors
 $primary: #fdb21e;
@@ -15,6 +15,15 @@ $theme-colors: map-merge(
     "secondary": $secondary,
   )
 );
+
+@font-face {
+  font-family: "DIN";
+  font-weight: normal;
+  src: url("./din-regular.ttf");
+}
+
+$font-family: "DIN", sans-serif;
+$font-family-base: "DIN", sans-serif;
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 

@@ -51,14 +51,18 @@ const Login = () => {
   return (
     <AuthWrapper>
       <form onSubmit={onSubmitHandler} className="d-flex flex-column gap-1">
-        <label>User Id</label>
+        <label>
+          <strong>User Id</strong>
+        </label>
         <input
           type="text"
           value={user}
           onChange={(e) => onUserChangeHandler(e.target.value)}
         />
 
-        <label>Password</label>
+        <label>
+          <strong>Password</strong>
+        </label>
         <input
           type="password"
           value={pass}
