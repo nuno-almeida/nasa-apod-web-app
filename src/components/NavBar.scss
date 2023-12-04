@@ -1,5 +1,17 @@
 @import "../scss/custom.scss";
 
 .navbar {
-    background-color: $background-navbar-color;
+  background-color: $background-navbar-color;
+}
+
+.home-btn {
+  border-radius: 32px;
+  width: 60px;
+  height: 60px;
+}
+
+.home-btn-home-selected {
+  border-color: $primary;
+  border-style: solid;
+  border-width: 3px;
 }

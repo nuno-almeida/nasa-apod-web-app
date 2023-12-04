@@ -72,7 +72,7 @@ const DataContainer = ({ title, date, explanation, url, hdurl, type }) => (
         <h4 className="card-title">{title}</h4>
         {!!hdurl && (
           <AppButton
-            classes="btn-outline-secondary"
+            classes="btn-secondary"
             clickHandler={() => window.open(hdurl)}
             text="Open HD image"
           />

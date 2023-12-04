@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import useViewport from "../hooks/useViewport";
 import AppButton from "./utils/AppButton";
@@ -34,15 +34,15 @@ const NavBar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light p-4">
-      <Link className="navbar-link" to="/">
-        <img
-          src={iconPath}
-          width="60"
-          height="60"
-          alt=""
-          style={{ borderRadius: "32px" }}
-        />
-      </Link>
+      <NavLink className="navbar-link" to="/">
+        {({ isActive }) => (
+          <img
+            src={iconPath}
+            className={`home-btn ${isActive && "home-btn-home-selected"}`}
+            alt=""
+          />
+        )}
+      </NavLink>
 
       <button
         className="navbar-toggler"

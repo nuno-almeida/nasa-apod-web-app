@@ -1,19 +1,22 @@
-@import '../../node_modules/bootstrap/scss/functions';
-@import '../../node_modules/bootstrap/scss/variables';
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
 
 $background-body-color: #d1d5d3;
 $background-navbar-color: #009bba;
 
 // override default bootstrap colors
-$primary: #FDB21E;
-$secondary:  #7BC4BE;
+$primary: #fdb21e;
+$secondary: #7bc4be;
 
-$theme-colors: map-merge($theme-colors, (
-  "primary": $primary,
-  "secondary": $secondary
-));
+$theme-colors: map-merge(
+  $theme-colors,
+  (
+    "primary": $primary,
+    "secondary": $secondary,
+  )
+);
 
-@import '../../node_modules/bootstrap/scss/bootstrap';
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
 // NOTE Watch your custom Sass for changes and compile it to CSS
 // https://getbootstrap.com/docs/5.3/customize/sass/
