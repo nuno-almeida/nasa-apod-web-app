@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import AlertStatus from "../utils/AlertStatus";
 import AuthContext from "../../contexts/AuthContext";
 import Loading from "../utils/Loading";
@@ -9,6 +9,8 @@ import AppButton from "../utils/AppButton";
 const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const redirectTo = location?.state?.replaceUrl || "/"
 
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
@@ -27,7 +29,7 @@ const Login = () => {
 
     login({ user, pass }).then((resp) =>
       resp.ok
-        ? navigate("/")
+        ? navigate(redirectTo)
         : setStatus((prev) => ({
             ...prev,
             loading: false,

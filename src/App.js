@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   Navigate,
+  useLocation,
 } from "react-router-dom";
 import AuthContext, { AuthProvider } from "./contexts/AuthContext";
 import HomePage from "./components/pages/Home";
@@ -15,8 +16,14 @@ const ByDate = lazy(() => import("./components/pages/ByDate"));
 const Today = lazy(() => import("./components/pages/Today"));
 
 const NavigateTo = ({ children, isAuth, requiresAuth = true }) => {
+  const location = useLocation();
   if (requiresAuth) {
-    return isAuth ? children : <Navigate to="/login" />;
+    if (isAuth) {
+      return children;
+    }
+    
+    const replaceUrl = location.pathname + location.search;
+    return <Navigate to="/login" state={{ replaceUrl }} />;
   }
 
   return isAuth ? <Navigate to="/" /> : children;
