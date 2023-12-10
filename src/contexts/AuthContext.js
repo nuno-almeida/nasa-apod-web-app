@@ -10,10 +10,7 @@ export const AuthProvider = ({ children }) => {
   const login = async ({ user, pass }) => {
     await delay(2000);
 
-    if (
-      user === localStorage.getItem("user") &&
-      pass === localStorage.getItem("pass")
-    ) {
+    if (pass === localStorage.getItem("auth_" + user)) {
       localStorage.setItem("login", "true");
       setIsAuth(true);
 
@@ -32,10 +29,7 @@ export const AuthProvider = ({ children }) => {
   // NOTE this is just a demo example
   const register = async ({ user, pass }) => {
     await delay(2000);
-    
-    localStorage.setItem("login", "true");
-    localStorage.setItem("user", user);
-    localStorage.setItem("pass", pass);
+    localStorage.setItem("auth_" + user, pass);
   };
 
   const logout = () => {
