@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunknasa_apod_web_app=self.webpackChunknasa_apod_web_app||[]).push([[520],{7520:(a,e,t)=>{t.r(e),t.d(e,{default:()=>p});var s=t(5584),r=t(2722),n=t(184);const p=()=>{const{isLoading:a,error:e,data:t}=(0,r.Z)({type:r.x.ByDate,date:(new Date).toISOString().split("T")[0]});return(0,n.jsx)(s.Z,{isLoading:a,error:e,data:t})}}}]);
+//# sourceMappingURL=520.bd40a288.chunk.js.map
